@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: sid
+      MYSQL_DATABASE: symfony_flex
+      MYSQL_USER: sid
+      MYSQL_PASSWORD: sid
+    volumes:
+      - ./my_sql_data:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    restart: always
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./docker/redis:/data
+    entrypoint: redis-server --appendonly yes
+    restart: always
+  web:
+    build: './php/'
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ../../symfonyFlex/:/var/www/html/
+    ports:
+      - '8080:80'
+    stdin_open: true
+    links: 
+      - db
+    tty: true

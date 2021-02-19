@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql57
+    volumes:
+      - ./my_sql_data:/var/lib/mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: sid
+      MYSQL_DATABASE: sid
+      MYSQL_USER: sid
+      MYSQL_PASSWORD: sid
+      
+
+  php:
+    container_name: php74
+    depends_on:
+      - mysql
+    build: './php/'
+    volumes:
+      - ../../melodieFrancaise/www/html:/var/www/html
+    restart: always
+    ports:
+      - '8080:80'

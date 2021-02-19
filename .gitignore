@@ -1,0 +1,15 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+
+symfonyFlex/my_sql_data
+php74/my_sql_data
+melodieFrancaise/my_sql_data
+antadis/my_sql_data
+

@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql57
+    volumes:
+      - ./my_sql_data:/var/lib/mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: simon
+      MYSQL_DATABASE: antadis
+      MYSQL_USER: sid_admin
+      MYSQL_PASSWORD: sid_pwd
+      
+
+  php:
+    container_name: php56
+    depends_on:
+      - mysql
+    build: './php/'
+    volumes:
+      - ../../Antadis/www/html:/var/www/html
+    restart: always
+    ports:
+      - '8080:80'
